@@ -24,11 +24,11 @@
               formControlName="projectName"
               class="form-control">
             <span
-              *ngIf="projectForm.get('projectData.projectName').required && !projectForm.get('projectData.projectName').touched"
+              *ngIf="projectForm.get('projectData.projectName').errors['required'] && projectForm.get('projectData.projectName').touched"
               class="help-block">
-              <!-- <span *ngIf="signupForm.get('userData.username').errors['nameIsForbidden']">This name is invalid!</span>
-              <span *ngIf="signupForm.get('userData.username').errors['required']">This field is required!</span> -->
-              <span>This field is required!</span>
+              <!-- <span *ngIf="signupForm.get('userData.username').errors['nameIsForbidden']">This name is invalid!</span> -->
+              <span *ngIf="projectForm.get('projectData.projectName').errors['required']">This field is required!</span>
+              <!-- <span>This field is required!</span> -->
             </span>
           </div>
           <div class="form-group">
