@@ -8,12 +8,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   projectForm: FormGroup;
+  statusses = ['Stable', 'Critical', 'Finished'];
 
   ngOnInit() {
     this.projectForm = new FormGroup({
       'projectData': new FormGroup({
         'projectName': new FormControl(null, [Validators.required]),
-        'email': new FormControl(null, [Validators.required, Validators.email])
+        'email': new FormControl(null, [Validators.required, Validators.email]),
+        'projectStatus': new FormControl(null, [Validators.required])
       })
     });
 
@@ -23,7 +25,8 @@ export class AppComponent implements OnInit {
     this.projectForm.setValue({
       'projectData': {
         'projectName': '',
-        'email': ''
+        'email': '',
+        'projectStatus': 'Stable'
       }
     });
   }

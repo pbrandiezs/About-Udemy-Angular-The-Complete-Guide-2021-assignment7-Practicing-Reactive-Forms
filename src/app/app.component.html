@@ -24,7 +24,7 @@
               formControlName="projectName"
               class="form-control">
             <span
-              *ngIf="!projectForm.get('projectData.projectName').required && projectForm.get('projectData.projectName').touched"
+              *ngIf="projectForm.get('projectData.projectName').required && !projectForm.get('projectData.projectName').touched"
               class="help-block">
               <!-- <span *ngIf="signupForm.get('userData.username').errors['nameIsForbidden']">This name is invalid!</span>
               <span *ngIf="signupForm.get('userData.username').errors['required']">This field is required!</span> -->
@@ -41,6 +41,14 @@
               <span
               *ngIf="!projectForm.get('projectData.email').valid && projectForm.get('projectData.email').touched"
               class="help-block">Please enter a valid email!</span>
+          </div>
+          <div class="radio" *ngFor="let status of statusses">
+            <label>
+              <input
+                type="radio"
+                formControlName="projectStatus"
+                [value]="status">{{ status }}
+            </label>
           </div>
         </div>
         <button class="btn btn-primary" type="submit">Submit</button>
