@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.projectForm = new FormGroup({
       'projectData': new FormGroup({
-        'projectName': new FormControl(null, [Validators.required, this.forbiddenNames.bind(this)]),
+        // 'projectName': new FormControl(null, [Validators.required, this.forbiddenNames.bind(this)]),
+        'projectName': new FormControl(null, [Validators.required], this.forbiddenNames),
         'email': new FormControl(null, [Validators.required, Validators.email]),
         'projectStatus': new FormControl(null, [Validators.required])
       })
@@ -33,11 +35,25 @@ export class AppComponent implements OnInit {
     console.log(this.projectForm);
   }
 
-  forbiddenNames(control: FormControl): {[s: string]: boolean} {
-    if (this.forbiddenProjectNames.indexOf(control.value) !== -1) {
-      return {'nameIsForbidden': true};
-    }
-    return null;
+  // forbiddenNames(control: FormControl): {[s: string]: boolean} {
+  //   if (this.forbiddenProjectNames.indexOf(control.value) !== -1) {
+  //     return {'nameIsForbidden': true};
+  //   }
+  //   return null;
+  // }
+
+  forbiddenNames(control: FormControl): Promise<any> | Observable<any> {
+    const promise = new Promise<any>((resolve, reject) => {
+      setTimeout(() => {
+        console.log("control.value is: " + control.value);
+        if (control.value === 'Test') {
+          resolve({'nameIsForbidden': true});
+        } else {
+          resolve(null);
+        }
+      }, 1500);
+    });
+    return promise;
   }
 
 }
