@@ -9,19 +9,17 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class AppComponent implements OnInit {
   projectForm: FormGroup;
   statusses = ['Stable', 'Critical', 'Finished'];
+  forbiddenProjectNames = ['Test'];
 
   ngOnInit() {
     this.projectForm = new FormGroup({
       'projectData': new FormGroup({
-        'projectName': new FormControl(null, [Validators.required]),
+        'projectName': new FormControl(null, [Validators.required, this.forbiddenNames.bind(this)]),
         'email': new FormControl(null, [Validators.required, Validators.email]),
         'projectStatus': new FormControl(null, [Validators.required])
       })
     });
 
-    // this.projectForm.statusChanges.subscribe(
-    //   (status) => console.log(status)
-    // );
     this.projectForm.setValue({
       'projectData': {
         'projectName': '',
@@ -35,7 +33,11 @@ export class AppComponent implements OnInit {
     console.log(this.projectForm);
   }
 
-  onSelectStatus() {
-    console.log("Status selected!");
+  forbiddenNames(control: FormControl): {[s: string]: boolean} {
+    if (this.forbiddenProjectNames.indexOf(control.value) !== -1) {
+      return {'nameIsForbidden': true};
+    }
+    return null;
   }
+
 }
