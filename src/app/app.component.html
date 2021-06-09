@@ -40,17 +40,14 @@
               *ngIf="!projectForm.get('projectData.email').valid && projectForm.get('projectData.email').touched"
               class="help-block">Please enter a valid email!</span>
           </div>
-          <div class="radio" *ngFor="let status of statusses">
-            <label>
-              <input
-                type="radio"
-                formControlName="projectStatus"
-                [value]="status">{{ status }}
-            </label>
+          <div class="form-group">
+            <label for="projectStatus"Project Status></label>
+            <select formControlName="projectStatus" class="form-control">
+              <option *ngFor="let status of statusses">{{status}}</option>
+            </select>
           </div>
         </div>
         <span
-
         *ngIf="(!projectForm.valid && projectForm.touched)"
         class="help-block">Please enter valid data!</span>
         <button class="btn btn-primary" type="submit">Submit</button>

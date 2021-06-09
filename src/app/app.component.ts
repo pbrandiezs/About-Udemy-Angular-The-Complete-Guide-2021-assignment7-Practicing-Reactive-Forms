@@ -34,4 +34,8 @@ export class AppComponent implements OnInit {
   onSubmit() {
     console.log(this.projectForm);
   }
+
+  onSelectStatus() {
+    console.log("Status selected!");
+  }
 }
