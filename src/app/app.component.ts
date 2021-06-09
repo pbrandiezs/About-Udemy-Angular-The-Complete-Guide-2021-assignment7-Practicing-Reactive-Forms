@@ -33,6 +33,9 @@ export class AppComponent implements OnInit {
 
   onSubmit() {
     console.log(this.projectForm);
+    console.log('Project Name is: ' + this.projectForm.value.projectData.projectName);
+    console.log('Email is: ' + this.projectForm.value.projectData.email);
+    console.log('Project Status is: ' + this.projectForm.value.projectData.projectStatus);
   }
 
   // forbiddenNames(control: FormControl): {[s: string]: boolean} {
