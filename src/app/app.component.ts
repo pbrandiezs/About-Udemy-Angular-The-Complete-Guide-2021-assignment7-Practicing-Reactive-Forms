@@ -33,9 +33,13 @@ export class AppComponent implements OnInit {
 
   onSubmit() {
     console.log(this.projectForm);
-    console.log('Project Name is: ' + this.projectForm.value.projectData.projectName);
-    console.log('Email is: ' + this.projectForm.value.projectData.email);
-    console.log('Project Status is: ' + this.projectForm.value.projectData.projectStatus);
+    if (this.projectForm.valid) {
+      console.log('Project Name is: ' + this.projectForm.value.projectData.projectName);
+      console.log('Email is: ' + this.projectForm.value.projectData.email);
+      console.log('Project Status is: ' + this.projectForm.value.projectData.projectStatus);
+    } else {
+      console.log("Invalid!!");
+    }
   }
 
   // forbiddenNames(control: FormControl): {[s: string]: boolean} {
@@ -48,7 +52,6 @@ export class AppComponent implements OnInit {
   forbiddenNames(control: FormControl): Promise<any> | Observable<any> {
     const promise = new Promise<any>((resolve, reject) => {
       setTimeout(() => {
-        console.log("control.value is: " + control.value);
         if (control.value === 'Test') {
           resolve({'nameIsForbidden': true});
         } else {
